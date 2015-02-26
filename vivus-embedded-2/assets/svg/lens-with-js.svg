@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg onload="onLoad(evt);" xmlns="http://www.w3.org/2000/svg" width="200px" height="200px" viewBox="0 0 200 200">
+<g id="group">
+	<circle fill="none" stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" cx="100" cy="100" r="90"/>
+	<circle fill="none" stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" cx="100" cy="100" r="85.74"/>
+	<circle fill="none" stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" cx="100" cy="100" r="72.947"/>
+	<circle fill="none" stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" cx="100" cy="100" r="39.74"/>
+	<line fill="none" stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" x1="34.042" y1="131.189" x2="67.047" y2="77.781"/>
+	<line fill="none" stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" x1="31.306" y1="75.416" x2="92.41" y2="60.987"/>
+	<line fill="none" stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" x1="68.81" y1="34.042" x2="122.219" y2="67.046"/>
+	<line fill="none" stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" x1="124.584" y1="31.305" x2="139.013" y2="92.409"/>
+	<line fill="none" stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" x1="165.957" y1="68.809" x2="132.953" y2="122.219"/>
+	<line fill="none" stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" x1="168.693" y1="124.584" x2="107.59" y2="139.012"/>
+	<line fill="none" stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" x1="131.19" y1="165.957" x2="77.781" y2="132.953"/>
+	<line fill="none" stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" x1="75.417" y1="168.693" x2="60.987" y2="107.59"/>
+	<ellipse cx="40%" cy="40%" rx="3%" ry="3%" stroke="#fff" stroke-width="2" fill="#000" />
+	<animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" begin="0s" dur="10s" repeatCount="indefinite"/>
+</g>
+<script type="text/javascript">
+<![CDATA[
+
+document.test = function(){
+	console.log('test from SVG');
+};
+var onLoad=function(evt) {
+	var target = evt.target;
+	var alertFromSVG = function(message){
+		alert('called within SVG file with parameter: '+message);
+	};
+	var setStrokeColor = function(hexColorAsString){ // like '#fe0' or '#3366ae'
+		if ( typeof hexColorAsString === 'undefined' ){
+			hexColorAsString = '#'+Math.floor(Math.random()*16777215).toString(16);
+		}
+		var children = document.getElementById('group').childNodes;
+		for (var i = 0; i < children.length; i++){
+			switch ( children[i].nodeName.toLowerCase() ) {
+				case 'circle':
+				case 'line':
+				case 'ellipse':
+					children[i].setAttribute('stroke',hexColorAsString);
+					break;
+				default:
+			}
+		}
+		
+	};
+	document._SVG={
+		 getElement		: function(){return target;}
+		,alertFromSVG	: alertFromSVG
+		,setStrokeColor	: setStrokeColor
+	};
+};
+/*
+The SVG element in this example can be accessed from outside with:
+...
+<object id="svg_C" type="image/svg+xml" data="svg/lens-with-js.svg" >Your browser does not support SVG</object>
+...
+(document.getElementById('svg_C')).addEventListener('load', function(e){
+		var doc = e.target.contentDocument;
+		doc.test();
+		doc._SVG.alertFromSVG('test');
+	}, false);
+...
+*/
+]]>
+</script>
+</svg>
