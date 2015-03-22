@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+  html {
+    background: #666;
+  }
+</style>
+
+<!-- <svg id="xx" class="peity" height="320" width="640" viewBox="0 0 16 32">
+    <polygon fill="#c6d9fd" points="0 15.5 0 7.166666666666666 3.5555555555555554 10.5 7.111111111111111 0.5 10.666666666666666 5.5 14.222222222222221 7.166666666666666 17.77777777777778 0.5 21.333333333333332 3.833333333333334 24.888888888888886 10.5 28.444444444444443 7.166666666666666 32 12.166666666666668 32 15.5"></polygon>
+    <polyline fill="transparent" points="0 7.166666666666666 3.5555555555555554 10.5 7.111111111111111 0.5 10.666666666666666 5.5 14.222222222222221 7.166666666666666 17.77777777777778 0.5 21.333333333333332 3.833333333333334 24.888888888888886 10.5 28.444444444444443 7.166666666666666 32 12.166666666666668" stroke="#4d89f9" stroke-width="1" stroke-linecap="square"></polyline>
+</svg> -->
+<object id="xx" type="image/svg+xml" data="opensource.svg" style="height: 200px;"></object>
+
+<script type="text/javascript" src="vivus.js"></script>
+<script type="text/javascript">
+  var xx = new Vivus('xx', {
+    start: 'autostart', 
+    type: 'oneByOne',
+  	onReady: function (obj) {
+      var i, 
+        counter = 0,
+        newMap = obj.map.sort(function(a,b) {
+          return b.duration - a.duration
+        });
+
+      for (i = 0; i < newMap.length; i++) {
+        newMap[i].startAt = counter;
+        counter += newMap[i].duration;
+      }
+
+      obj.map = newMap;
+    }
+  });
+</script>
+
+</html>
