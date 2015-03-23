@@ -476,9 +476,8 @@ stuff(1, ,2);
         </section>
 
         <section>
-          <p class="question">How to use the progress on a ES6 Promise?</p>
-          <p>(like in the Q library)</p>
-          <h2 class="response negative fragment">Sorry, this is not available in ES6 :-(</h2>
+          <p class="question">How to use the progress on a ES6 Promise?<br/><small>(like in the Q library)</small></p>
+          <h2 class="response negative fragment">Sorry,<br/>this is not available in ES6 :-(</h2>
         </section>
 
         <section>
@@ -486,7 +485,7 @@ stuff(1, ,2);
           <pre>
             <code data-trim contenteditable>
 uploadFile()
-  .then(function ()         {/* Success */},
+  .then(function (data)     {/* Success */},
         function (err)      {/* Error */},
         function (progress) {/* Progress */});
 // Or..
@@ -499,8 +498,8 @@ uploadFile()
         </section>
 
         <section>
-          <p class="question">Is there a method to take a lot of promises to wrap them into one which will be resolved (or reected) once one of them will be resolved?</p>
-          <h2 class="response fragment">Yes, it's "race"</h2>
+          <p class="question">Is there a method to take a lot of promises, wrap them into one which will be resolved (or rejected) once one of them will be resolved?</p>
+          <h2 class="response fragment">Yes, it's 'race'</h2>
         </section>
 
         <section>
@@ -535,6 +534,11 @@ Promise
           <h2 class="response negative fragment">NONE! ES6 is completely retrocompatible</h2>
         </section>
 
+        <section>
+          <p class="question">Which stable browser got the best ES6 support ?</p>
+          <h2 class="response fragment">Firefox 36 (64%)</h2>
+        </section>
+
 
         <!-- Extra -->
         <!-- ---------------------------------------------------- -->
@@ -560,11 +564,11 @@ var a = 0x1101010110111,
         <section>
           <table style="font-size: 2.5em;">
             <tr>
-              <td>x/0</td>
+              <td>x</td>
               <td>Hexa</td>	
             </tr>
             <tr>
-              <td>o</td>
+              <td>o/0</td>
               <td>Octal</td>
             </tr>
             <tr>
@@ -581,6 +585,19 @@ var a = 0x1101010110111,
 
         <!-- Credits -->
         <!-- ---------------------------------------------------- -->
+        <section data-background="#F0DB4F" class="js-theme">
+          <h2>More info at</h2>
+
+          <h3>MDN: Mozilla Developer Network</h3>
+          <h5>https://developer.mozilla.org/</h5>
+
+          <h3>ES6 compatibility table (by Kangax)</h3>
+          <h5>http://kangax.github.io/compat-table/es6/</h5>
+
+          <h3>Power of ES6 (by Charles B. King)</h3>
+          <h5>http://charlesbking.com/power_of_es6/#/45</h5>
+        </section>
+
         <section data-background="#F0DB4F" class="js-theme">
           <h1>Thanks everybody</h1>
         </section>
