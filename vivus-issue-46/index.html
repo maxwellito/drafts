@@ -9,16 +9,23 @@
 </style>
 
 <div id="animation"></div>
+<div id="animation2"></div>
 
 <script type="text/javascript" src="vivus.js"></script>
 <script type="text/javascript">
-  var opts = {
+  new Vivus('animation', {
     file: 'Chess_set_symbols_igor_k_01.svg',
     type: 'async',
     duration: 150
-  }
+  }, function() {
+    console.log('Done');   
+  });
 
-  new Vivus('animation', opts, function() {
+  new Vivus('animation2', {
+    file: 'Chess_set_symbols_igor_k_02.svg',
+    type: 'async',
+    duration: 350
+  }, function() {
     console.log('Done');   
   });
 </script>
