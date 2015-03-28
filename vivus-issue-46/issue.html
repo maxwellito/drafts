@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+
+<style>
+  html {
+    background: #666;
+  }
+</style>
+
+<div id="animation"></div>
+
+<script type="text/javascript" src="vivus.js"></script>
+<script type="text/javascript">
+  var opts = {
+    file: 'Chess_set_symbols_igor_k_01.svg',
+    type: 'async',
+    duration: 150
+  }
+
+  new Vivus('animation', opts, function() {
+    console.log('Done');   
+  });
+</script>
+
+</html>
