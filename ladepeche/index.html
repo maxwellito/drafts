@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>We Luv Arte</title>
+    <style>
+      body {
+        margin: 0 0 40px;
+        font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+        font-weight: 300;
+        font-size: 24px;
+        color: #666666;
+        background-color: #f9f9f9;
+      }
+      .link {
+        color: inherit;
+      }
+      .panel {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 480px;
+        height: 340px;
+        margin-top: -170px;
+        margin-left: -240px;
+        text-align: center;
+      }
+      .code {
+        display: block;
+        padding: 6px;
+        font-family: monospace;
+        font-size: 16px;
+        text-align: left;
+        word-break: break-all;
+        border-radius: 4px;
+        background-color: #dddddd;
+      }
+      .button {
+        padding: 6px;
+        border-radius: 4px;
+        color: #f9f9f9;
+        background-color: #fd4600;
+        font-weight: bold;
+        text-decoration: none;
+      }
+      .credits {
+        font-size: 0.6125em;
+        font-style: italic;
+      }
+      .not-visible {
+        display: inline-block;
+        width: 0px;
+        height: 0px;
+        overflow: hidden;
+      }
+
+      @media only screen and (max-width:480px) {
+        .panel {
+          position: inherit;
+          width: auto;
+          height: auto;
+          margin: 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="panel">
+
+      <p>Drag this <a class="button" onclick="alert('I didn\'t say to click on it. I asked to drag it. Try again.'); return false;" href="javascript:document.getElementById('cover').remove();document.getElementById('wrap').style.overflow='auto';void(0);" title="LaDepeche Pirate">LaDepeche Pirate</a> onto your bookmarks bar</p>
+
+    </div>
+  </body>
+</html>
