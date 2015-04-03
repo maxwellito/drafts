@@ -1,0 +1,114 @@
+<html>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <form onSubmit="loadVideo();return false;">
+    <input type="text" placeholder="Video ID">
+    <button>GO!</button>  
+  </form>
+
+  <div class="aspect-ratio">
+    <video src="#" width="320" height="180" controls></video>
+  </div>
+  
+  <h2></h2>
+
+  
+  <script>
+    var videoTag    = document.querySelector('video'),
+        videoInput  = document.querySelector('input'),
+        display     = document.querySelector('h2');
+
+    function loadVideo () {
+      getData(videoInput.value);
+    }
+
+    function getData(videoID) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'http://service.canal-plus.com/video/rest/getVideosLiees/cplus/' + videoID + '?format=json', true);
+      xhr.onreadystatechange = function (aEvt) {
+        if (this.readyState == 4 && this.status == 200) {
+          try {
+            var i, jsonData = JSON.parse(this.responseText);
+            if (jsonData.ID) {
+              setupVideo(jsonData);
+              return;
+            }
+            else {
+              for (i = jsonData.length - 1; i>=0; i--) {
+                if (jsonData[i].ID === videoID) {
+                  setupVideo(jsonData[i]);
+                  return;
+                }
+              }
+            }
+            promptr('Video not found', false);
+          }
+          catch (e) {
+            promptr('Failed to parse ' + videoID, false);
+          }
+        }
+      };
+      xhr.send(null);    
+    }
+
+    function setupVideo (videoData) {
+      var link    = videoData.MEDIA && videoData.MEDIA.VIDEOS && videoData.MEDIA.VIDEOS.HLS,
+        title     = videoData.INFOS && videoData.INFOS.TITRAGE && videoData.INFOS.TITRAGE.TITRE,
+        subtitle  = videoData.INFOS && videoData.INFOS.TITRAGE && videoData.INFOS.TITRAGE.SOUS_TITRE;
+
+      videoTag.src = link;
+      videoTag.play();
+      promptr(title + '/' + subtitle, true);
+    }
+
+    function promptr (message, success) {
+      display.style.color = success ? 'black' : 'red';
+      display.textContent = message;
+    }
+
+  </script>
+
+
+  <style>
+    body {
+      font-family: sans-serif;
+      font-size: 24px;
+    }
+
+    form {
+      padding-bottom: 10px;
+      border-bottom: 1px solid #CCC;
+      margin-bottom: 10px;
+    }
+
+    input, button {
+      font-size: 24px;
+      border: 1px solid #CCC;
+      background: #F9F9F9;
+      line-height: 30px;
+      padding: 4px 8px;      
+    }
+
+
+
+
+    video {
+      width: 100%;
+    }
+
+    .aspect-ratio {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 51%;
+    }
+
+    .aspect-ratio video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0; top: 0;
+    }
+  </style>
+</html>
