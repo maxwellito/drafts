@@ -1,0 +1,30 @@
+body {
+  background: #1b1b1b;
+}
+
+/**
+ * A menu got 2 states
+ * 
+ * - standby (default): where the menu icon aren't displayed
+ * - active: when a choice is in progress
+ *
+ */
+.circular-menu .center { fill: rgba(255,255,255,0.25); }
+.circular-menu .option { display: none; }
+.circular-menu .option .surface { fill: rgba(255,255,255,0.25); }
+.circular-menu .option .border  { fill: rgba(0,0,0,0.25); }
+
+
+.circular-menu.visible .center          { fill: rgba(255,255,255,0.125); }
+.circular-menu.visible .center.selected { fill: rgba(255,255,255,0.75); stroke: rgba(0,170,255,0.5); stroke-width: 2px; }
+
+.circular-menu.visible .option { display: inherit; }
+.circular-menu.visible .option.selected .surface { fill: rgba(255,255,255,0.75); }
+.circular-menu.visible .option.selected .border {
+  display: inherit;
+  fill: #00aaff;
+  -webkit-filter: blur(0.25px);
+  filter: blur(0.25px);
+}
+
+.circular-menu.visible .option.active .surface { fill: rgba(0,170,255,0.75); }
