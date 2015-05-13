@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Promises - ES6</title>
+
+  <meta name="description" content="Slides for a gentle ECMA Script 6 quiz">
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+  var link = document.createElement( 'link' );
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+  document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+
+  <style>
+    /* Style override */
+    .reveal ul {
+      list-style: none;
+      margin: 24px auto;
+
+      display:flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-content: flex-start;
+      align-items: flex-start;
+    }
+    .reveal ul li {
+      margin: 6px;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-family: 'Raleway';
+      font-size: 2em;
+      background: white;
+      color: black;
+    }
+    .reveal .slides {
+      text-align: left;
+    }
+
+    .reveal .js-theme {
+      color: #323330;
+    }
+
+    .reveal p.question {
+      position: relative;
+      margin-left: 80px;
+      font-family: 'Raleway';
+      font-style: italic;
+      font-size: 2em;
+      text-decoration: underline;
+    }
+    .reveal p.quote {
+      font-family: 'Raleway';
+      font-style: italic;
+      font-size: 2em;
+      text-decoration: underline;
+    }
+    .question::before {
+      content: "?";
+      position: absolute;
+      left: -80px;
+      top: 10px;
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      margin-right: 12px;
+      border-radius: 50%;
+
+      font: 'Raleway' normal bold 1em;
+      font-style: normal;
+      font-weight: bold;
+      line-height: 1em;
+      text-align: center;
+
+      color: #333333;
+      text-shadow: 0 -2px 0 #111111;
+      background: #E9E9E9;
+      box-shadow: 0 2px 0 #333333;
+    }
+
+    .response {
+      padding: 10px;
+      border-radius: 4px;
+      text-align: center;
+      font-weight: bold;
+      background-color: rgba(255,255,255,0.25);
+    }
+    .response.positive {
+      background-color: #00dd00;
+    }
+    .response.negative {
+      background-color: #dd0000;
+    }
+
+    .reveal .doge {
+      position: absolute;
+      font-family: 'Comic Sans MS', fantasy;
+    }
+
+    .reveal pre code {
+      max-height: 410px;
+    }
+  </style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+        <!-- Intro -->
+        <section data-background="#F0DB4F" class="js-theme">
+          <h1>Promises</h1>
+          <h2>ECMAScript 6</h2>
+        </section>
+
+        <!-- Var -->
+        <!-- ---------------------------------------------------- -->
+        <section data-background="#F0DB4F" class="js-theme">
+          <h1>the what?</h1>
+        </section>
+
+        <section>
+          <h2>It probably started because of this</h2>
+          <pre>
+            <code data-trim>
+loadUserInfo(function (data, error) {
+  loadPostInfo(function (data, error) {
+    loadRelatedContent(function (data, error) {
+      loadSomethingElse(function (data, error) {
+        // ..cascade to Mordor
+      })
+    })
+  })
+})
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h2>The Promise object is used for deferred and asynchronous computations.</h2>
+        </section>
+
+        <section>
+          <h2>Create a promise</h2>
+          <pre>
+            <code data-trim contenteditable>
+new Promise(function (resolve, reject) {
+  $ajax({
+    url:'/api/v1/user',
+    success: resolve,
+    error: reject
+  })
+});
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h2>Use a promise</h2>
+          <pre>
+            <code data-trim contenteditable>
+loadUser
+  .then(function (data) {
+    // Success
+    displayTheData(data);
+  },
+  function (err) {
+    // Error
+    displayThePopupOfDeath();
+  });
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <pre>
+            <code data-trim contenteditable>
+loadUser
+  .then( function (data) {/* Success */},
+         function (err)  {/* Error   */})
+
+loadUser
+  .then( function (data) {/* Success */})
+  .catch(function (err)  {/* Error   */})
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <pre>
+            <code data-trim>
+loadUserInfo.then(function (data) {
+  loadPostInfo.then(function (data) {
+    loadRelatedContent.then(function (data) {
+      loadSomethingElse.then(function (data) {
+        // ..cascade to Mordor with promises
+      })
+    })
+  })
+})
+            </code>
+          </pre>
+          <h2 class="fragment">Ermmmm.... of course not.</h2>
+        </section>
+
+        <section>
+          <h2>But this</h2>
+          <pre>
+            <code data-trim>
+loadUserInfo
+  .then(function (data) {
+    return loadPostInfo;
+  })
+  .then(function (data) {
+    return loadRelatedContent;
+  })
+  .then(function (data) {
+    return loadSomethingElse;
+  })
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h2>A promise got 4 different states</h2>
+          <ul>
+            <li>pending</li>
+            <li>fulfilled</li>
+            <li>rejected</li>
+            <li>settled</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Generate promises</h2>
+          <pre>
+            <code data-trim>
+Promise.resolve(data)
+// Return a resolved promise
+
+Promise.reject(reason)
+// Return a rejected promise
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h2>Promise.all()</h2>
+          <pre>
+            <code data-trim>
+Promise.all([
+    loadUserInfo,
+    loadPostInfo,
+    loadRelatedContent
+  ])
+  .then(function (data) {
+    // All promises are resolved
+  });
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <h2>Promise.race()</h2>
+          <pre>
+            <code data-trim contenteditable>
+Promise
+  .race([loadSiteMap, loadGOTin4K])
+  .then(function(value) {
+    // Success case
+  }, function(reason) {
+    // Error case
+  });
+            </code>
+          </pre>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+    	// Full list of configuration options available at:
+    	// https://github.com/hakimel/reveal.js#configuration
+    	Reveal.initialize({
+    		controls: false,
+    		progress: true,
+    		history: true,
+    		center: true,
+
+    		transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+    		// Optional reveal.js plugins
+    		dependencies: [
+          {
+            src: 'lib/js/classList.js',
+            condition: function() { return !document.body.classList; }
+          },
+          {
+            src: 'plugin/markdown/marked.js',
+            condition: function() { return !!document.querySelector( '[data-markdown]' ); }
+          },
+          {
+            src: 'plugin/markdown/markdown.js',
+            condition: function() { return !!document.querySelector( '[data-markdown]' ); }
+          },
+          {
+            src: 'plugin/highlight/highlight.js',
+            async: true,
+            condition: function() { return !!document.querySelector( 'pre code' ); },
+            callback: function() { hljs.initHighlightingOnLoad(); }
+          },
+          {
+            src: 'plugin/zoom-js/zoom.js',
+            async: true
+          },
+          {
+            src: 'plugin/notes/notes.js',
+            async: true
+          }
+        ]
+      });
+
+    </script>
+  </body>
+</html>
