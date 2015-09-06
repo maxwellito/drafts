@@ -633,7 +633,7 @@ Vivus.prototype.trace = function () {
     path = this.map[i];
     progress = (currentFrame - path.startAt) / path.duration;
     progress = this.pathTimingFunction(progress);
-    //# progress = this.pathTimingFunction(Math.max(0, Math.min(1, progress)));
+    //progress = this.pathTimingFunction(Math.max(0, Math.min(1, progress)));
     if (path.progress !== progress) {
       path.progress = progress;
       path.el.style.strokeDashoffset = Math.floor(path.length * (1 - progress));
@@ -769,7 +769,7 @@ Vivus.prototype.finish = function () {
  * @param {number} progress Level of progress to set
  */
 Vivus.prototype.setFrameProgress = function (progress) {
-  //# progress = Math.min(1, Math.max(0, progress));
+  progress = Math.min(1, Math.max(0, progress));
   this.currentFrame = Math.round(this.frameLength * progress);
   this.trace();
   return this;
