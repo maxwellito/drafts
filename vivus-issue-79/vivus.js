@@ -523,11 +523,11 @@ Vivus.prototype.mapping = function () {
       }
       continue;
     }
-    totalLength += pathObj.length;
     this.map.push(pathObj);
     path.style.strokeDasharray  = pathObj.length + ' ' + (pathObj.length + this.dashGap * 2);
     path.style.strokeDashoffset = pathObj.length + this.dashGap;
     pathObj.length += this.dashGap;
+    totalLength += pathObj.length;
 
     this.renderPath(i);
   }
