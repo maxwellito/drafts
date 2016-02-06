@@ -1024,7 +1024,6 @@ Vivus.prototype.previous = function () {
 };
 
 Vivus.prototype.setMilestoneAndGo = function () {
-  console.log(this.currentStep);
   if (this.currentStep) {
     var currentPath = this.map[this.currentStep - 1];
     this.milestone = currentPath.startAt + currentPath.duration;    
@@ -1033,7 +1032,6 @@ Vivus.prototype.setMilestoneAndGo = function () {
     this.milestone = 0;
   }
 
-  console.info(this.currentStep, this.milestone, (this.milestone - this.currentFrame > 0) ? 1 : -1);
   this.play((this.milestone - this.currentFrame > 0) ? 1 : -1);
 };
 
@@ -1041,7 +1039,6 @@ Vivus.prototype.drawer = function () {
   var self = this;
 
   if (Math.abs(this.milestone - this.currentFrame) <= Math.abs(this.speed)) {
-    console.info(this.milestone, this.currentFrame, this.speed);
     this.currentFrame = this.milestone;
     this.handle = null;
     if (this.currentFrame >= this.frameLength) {
