@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>vivus.js - svg animation</title>
+		<meta name="description" content="SVG Drawing Animation" />
+
+		<style type="text/css">
+
+			/* Base style */
+			html {
+				font-size: 24px;
+			}
+			body {
+				margin: 0 0 40px;
+				font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+				font-weight: 200;
+				color: #666666;
+				background-color: #FFFFFF;
+				word-break: break-word;
+			}
+			a, a:visited, a:hover, a:link {
+				color: inherit;
+				outline: 0;
+			}
+			small {
+				font-weight: 100;
+			}
+			p {
+				font-size: 1rem;
+				line-height: 1.4rem;
+			}
+			button, .button {
+				margin: 0; padding: 3px 6px;
+				border-radius: 6px;
+				border: 1px solid currentColor;
+				color: inherit;
+				background-color: rgba(0,0,0,0);
+				font-size: 0.6rem;
+				font-weight: 300;
+				text-decoration: none;
+				cursor: pointer;
+				outline: 0;
+			}
+			button.active, .button.active {
+				background-color: currentColor;
+			}
+			button.active span, .button.active span {
+				color: #FFFFFF;
+			}
+			i {
+				background-color: rgba(0, 0, 0, 0.05);
+				border-radius: 4px;
+			}
+			svg * {
+				fill: none;
+				stroke: currentColor;
+			}
+
+			/* Common components */
+			.bloc {
+				color: #f9f9f9;
+				padding: 1px 0 30px;
+				clear: both;
+			}
+			.content {
+				margin: auto;
+				max-width: 960px;
+				padding: 0 20px;
+			}
+			.col3 {
+				width: 33.33%;
+				float: left;
+				text-align: center;
+				border-bottom-color: currentColor;
+				border-bottom-style: solid;
+			}
+			.col-container {
+				padding: 0 12px;
+			}
+			.col3 p {
+				font-size: 0.75rem;
+				line-height: 1.05rem;
+			}
+
+			/* Text */
+			.bigger {
+				font-size: 1rem;
+				font-weight: 100;
+				line-height: 1.4rem;
+			}
+			.center {
+				text-align: center;
+			}
+			.clearer {
+				clear: both;
+			}
+			.striked {
+				text-decoration: line-through;
+			}
+			.italic {
+				font-style: italic;
+			}
+
+			/* Blocs */
+			.bloc-head     { color: #5aa8c5; padding: 30px; }
+			.bloc-demo     { color: #FF495F; }
+			.bloc-timing   { color: #F7A800; }
+			.bloc-scenario { color: #4fe084; }
+			.bloc-doc      { color: #69B0CA; }
+
+			/* Custom */
+			#hi-there {
+				width: 100%;
+			}
+			.intro-links {
+				text-align: right;
+			}
+			.example-description {
+				margin-left: 440px;
+			}
+			.timing-description {
+				min-height: 200px;
+				margin-right: 240px;
+			}
+			#polaroid {
+				float: left;
+				width: 400px; height: 320px;
+			}
+			#timing-example {
+				float: right;
+				width: 175px; height: 175px;
+			}
+			.goodbye-head {
+				font-size: 1.5rem;
+				text-align: center;
+				margin-bottom: 0;
+			}
+			.goodbye-sub {
+				font-size: 0.875rem;
+				text-align: center;
+				margin: 0 0 20px;
+			}
+
+			/* Media queries */
+			@media (max-width: 960px) {
+				.button-group { display: block; line-height: 1.8em; }
+			}
+
+			@media (min-width: 768px) {
+				.col3 { border-bottom: none; }
+			}
+
+			@media (max-width: 767px) {
+				#polaroid { width: 100%; max-height: 300px; }
+				.example-description { margin-left: 0; }
+				.timing-description { margin-right: 0; }
+				#timing-example { float: none; width: 100%; }
+
+				.col3 { width: 100%; float: none; margin-bottom: 25px; padding-bottom: 25px; border-bottom-width: 1px; min-height: 200px; }
+				.col3:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom-width: 0px; }
+			}
+
+			@media (min-width: 481px) and (max-width: 767px) {
+				#polaroid { width: 100%; max-height: 300px; }
+				.example-description { margin-left: 0; }
+				.timing-description { margin-right: 0; }
+
+				.col3:nth-child(2n) svg {
+					width: 200px;
+					float: right;
+				}
+				.col3:nth-child(2n) .col-container {
+					text-align: right;
+					margin-right: 200px;
+				}
+				.col3:nth-child(2n+1) svg {
+					width: 200px;
+					float: left;
+				}
+				.col3:nth-child(2n+1) .col-container {
+					text-align: left;
+					margin-left: 200px;
+				}
+			}
+
+			@media (max-width: 480px) {
+				.col-container { padding: 0px; }
+				#polaroid { width: 100%; max-height: 260px; }
+			}
+
+		</style>
+	</head>
+	<body>
+
+		<svg id="obturateur" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+ width="100%" height="200px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" onclick="obt1.reset().play();">
+			<circle stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" cx="100" cy="100" r="90"/>
+			<circle stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" cx="100" cy="100" r="85.74"/>
+			<circle stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" cx="100" cy="100" r="72.947"/>
+			<circle stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" cx="100" cy="100" r="39.74"/>
+			<line stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" x1="34.042" y1="131.189" x2="67.047" y2="77.781"/>
+			<line stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" x1="31.306" y1="75.416" x2="92.41" y2="60.987"/>
+			<line stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" x1="68.81" y1="34.042" x2="122.219" y2="67.046"/>
+			<line stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" x1="124.584" y1="31.305" x2="139.013" y2="92.409"/>
+			<line stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" x1="165.957" y1="68.809" x2="132.953" y2="122.219"/>
+			<line stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" x1="168.693" y1="124.584" x2="107.59" y2="139.012"/>
+			<line stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" x1="131.19" y1="165.957" x2="77.781" y2="132.953"/>
+			<line stroke="#f9f9f9" stroke-width="3" stroke-miterlimit="10" x1="75.417" y1="168.693" x2="60.987" y2="107.59"/>
+		</svg>
+
+		<button onclick="obt.next();">Next</button>
+		<button onclick="obt.previous();">Previous</button>
+
+		<!-- Le scripts -->
+		<script src="vivus.js"></script>
+		<script>
+
+			var obt = new Vivus('obturateur', {
+				type: 'oneByOne',
+				duration: 150,
+				start: 'manual'
+			});
+
+		</script>
+	</body>
+</html>

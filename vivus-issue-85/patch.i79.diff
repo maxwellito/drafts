@@ -1,0 +1,22 @@
+449c449
+<   this.dashGap     = parsePositiveInt(options.dashGap, 1);
+---
+>   this.dashGap     = parsePositiveInt(options.dashGap, 2);
+526,529d525
+<     this.map.push(pathObj);
+<     path.style.strokeDasharray  = pathObj.length + ' ' + (pathObj.length + this.dashGap * 2);
+<     path.style.strokeDashoffset = pathObj.length + this.dashGap;
+<     pathObj.length += this.dashGap;
+530a527,529
+>     this.map.push(pathObj);
+>     path.style.strokeDasharray  = pathObj.length + ' ' + (pathObj.length + this.dashGap);
+>     path.style.strokeDashoffset = pathObj.length;
+531a531,534
+>     // Fix IE glitch
+>     if (this.isIE) {
+>       pathObj.length += this.dashGap;
+>     }
+640c643
+<       path.el.style.strokeDashoffset = path.length * (1 - progress);
+---
+>       path.el.style.strokeDashoffset = Math.floor(path.length * (1 - progress));
