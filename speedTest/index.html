@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<canvas width="411" height="500" id="pic1"></canvas>
+
+<script>
+	var canvasData,
+			originalData,
+			canvas1,
+			img1 = new Image();
+
+	img1.src = 'pic2.jpg';
+	img1.addEventListener("load", function() {
+		canvas1 = document.getElementById('pic1').getContext('2d');
+		canvas1.drawImage(img1, 0, 0);
+
+		canvasData   = canvas1.getImageData(0, 0, 411, 500).data;
+		originalData = Uint8Array.from(canvasData);
+	}, false);
+
+	function delay (input) {
+		input = Math.max(0, Math.min(127, input));
+		var v = [
+			Math.floor(input / 2),
+			Math.floor(input / 16),
+			Math.floor(input / 4),
+			Math.floor(input / 8),
+		];
+
+		var ax = v[input       % 4],
+				ay = v[(input + 1) % 4],
+				bx = v[(input + 2) % 4],
+				by = v[(input + 3) % 4];
+
+		console.log(ax, ay, bx, by);
+
+		var x = 0,
+				y = 0,
+				canvasDataa = canvas1.getImageData(0, 0, 411, 500);
+
+		var byteLength = originalData.length;
+		for (var i = 0; i < byteLength; i++) {
+			canvasDataa[i] = 0;continue;
+			if (i % 4 > 1) {
+				continue;
+			}
+			x = Math.floor(i % (411 * 4) / 4);
+			y = Math.floor(i / (411 * 4));
+			if (i % 4 === 0) {
+				canvasDataa[i] = 0;//originalData[((((x + ax) % 411) + ((y + ay) % 500) * 411)) * 4];
+			}
+			else {
+				canvasDataa[i] = 0;//originalData[((((x + bx) % 411) + ((y + by) % 500) * 411)) * 4 + 1];
+			}
+		}
+
+
+		canvas1.putImageData(canvasDataa, 0, 0);
+
+
+
+	}
+
+</script>
+
+</html>
