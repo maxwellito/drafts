@@ -17,8 +17,8 @@
 		canvas1 = document.getElementById('pic1').getContext('2d');
 		canvas1.drawImage(img1, 0, 0);
 
-		canvasData   = canvas1.getImageData(0, 0, 411, 500).data;
-		originalData = Uint8Array.from(canvasData);
+		canvasData   = canvas1.getImageData(0, 0, 411, 500);
+		originalData = Uint8Array.from(canvasData.data);
 	}, false);
 
 	function delay (input) {
@@ -31,37 +31,38 @@
 		];
 
 		var ax = v[input       % 4],
-				ay = v[(input + 1) % 4],
-				bx = v[(input + 2) % 4],
+				ay = -v[(input + 1) % 4],
+				bx = -v[(input + 2) % 4],
 				by = v[(input + 3) % 4];
 
-		console.log(ax, ay, bx, by);
-
 		var x = 0,
-				y = 0,
-				canvasDataa = canvas1.getImageData(0, 0, 411, 500);
+				y = 0;
 
-		var byteLength = originalData.length;
+		var byteLength = canvasData.data.length;
 		for (var i = 0; i < byteLength; i++) {
-			canvasDataa[i] = 0;continue;
 			if (i % 4 > 1) {
 				continue;
 			}
 			x = Math.floor(i % (411 * 4) / 4);
 			y = Math.floor(i / (411 * 4));
 			if (i % 4 === 0) {
-				canvasDataa[i] = 0;//originalData[((((x + ax) % 411) + ((y + ay) % 500) * 411)) * 4];
+				canvasData.data[i] = originalData[((((x + ax) % 411) + ((y + ay) % 500) * 411)) * 4];
 			}
 			else {
-				canvasDataa[i] = 0;//originalData[((((x + bx) % 411) + ((y + by) % 500) * 411)) * 4 + 1];
+				canvasData.data[i] = originalData[((((x + bx) % 411) + ((y + by) % 500) * 411)) * 4 + 1];
 			}
 		}
 
+		canvas1.putImageData(canvasData, 0, 0);
 
-		canvas1.putImageData(canvasDataa, 0, 0);
+	}
 
-
-
+	function go () {
+		var i = 0;
+		setInterval(function () {
+			delay(i);
+			i++;
+		}, 50);
 	}
 
 </script>
