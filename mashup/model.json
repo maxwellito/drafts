@@ -1,0 +1,109 @@
+{
+  "config": {
+    "canvas": {
+      "width": 320,
+      "height": 180
+    }
+  },
+  "devices": [
+    {
+      "type": "midi",
+      "name": "Mini MPK Akai"
+    },
+    {
+      "type": "keyboard"
+    }
+  ],
+  "workspaces": [
+    [
+      {
+        "on": "press",
+        "key": 43,
+        "device": 1,
+        "actions": [
+          {
+            "type": "sound",
+            "channel": 1,
+            "index": 0,
+            "startAt": 220
+          },
+          {
+            "type": "sprite",
+            "channel": 1,
+            "index": 0,
+            "startAt": 220
+          }
+        ]
+      },
+      {
+        "on": "press",
+        "key": 44,
+        "device": 1,
+        "actions": [
+          {
+            "type": "sound",
+            "channel": 1,
+            "index": 0,
+            "startAt": 6164,
+            "duration": 650
+          },
+          {
+            "type": "sprite",
+            "channel": 1,
+            "index": 0,
+            "startAt": 220
+          }
+        ]
+      }
+    ]
+  ],
+  "assets": {
+    "sounds": [
+      "assets/headsWillRoll/hwr_001.wav",
+      "assets/headsWillRoll/hwr_002.wav",
+      "assets/headsWillRoll/hwr_003.wav",
+      "assets/headsWillRoll/hwr_004.wav",
+      "assets/headsWillRoll/hwr_005.wav",
+      "assets/headsWillRoll/hwr_006.wav",
+      "assets/kick.wav"
+    ],
+    "sprites": [
+      {
+        "url": "assets/cat/cat_001.jpg",
+        "columns": 2,
+        "length": 10,
+        "fps": 20
+      },
+      {
+        "url": "assets/cat/cat_003.jpg",
+        "columns": 2,
+        "length": 10,
+        "fps": 20
+      },
+      {
+        "url": "assets/cat/cat_005.jpg",
+        "columns": 2,
+        "length": 10,
+        "fps": 20
+      },
+      {
+        "url": "assets/cat/cat_006.jpg",
+        "columns": 2,
+        "length": 10,
+        "fps": 20
+      },
+      {
+        "url": "assets/cat/cat_002.jpg",
+        "columns": 2,
+        "length": 10,
+        "fps": 20
+      },
+      {
+        "url": "assets/cat/cat_004b.jpg",
+        "columns": 2,
+        "length": 10,
+        "fps": 20
+      }
+    ]
+  }
+}
