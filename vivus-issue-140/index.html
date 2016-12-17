@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>vivus.js - issue 140</title>
+		<meta name="description" content="SVG Drawing Animation" />
+	</head>
+	<body>
+
+		<div id="here"></div>
+
+		<!-- Le scripts -->
+		<script src="vivus.min.js"></script>
+		<script>
+			var obt1 = new Vivus('here', {
+				type: 'oneByOne',
+				duration: 150,
+				file: 'icon.svg',
+				start: 'autostart'
+			}, function (obj) {
+				// When the animation ends, this will set the
+				// class for the final transition
+			  obj.el.classList.add('finished');
+			});
+		</script>
+
+		<!-- Le style -->
+		<style>
+
+		  /* The style will just set the fill as transparent for start
+         and a border is set to black
+			*/
+			#here * {
+				fill-opacity: 0;
+				stroke-opacity: 1;
+				stroke: black;
+				stroke-width: 2;
+			  transition: fill-opacity 1s, stroke-opacity 1s;
+			}
+
+			/*
+				Here is the styling once finished, it will revert the
+				the opacity value between fill and stroke
+			 */
+			#here .finished * {
+			  fill-opacity: 1;
+				stroke-opacity: 0;
+			}
+		</style>
+	</body>
+</html>
