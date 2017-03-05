@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>vivus.js - issue 148</title>
+		<meta name="description" content="SVG Drawing Animation" />
+	</head>
+	<body>
+
+
+		<div id="logo" style="height:400px;"></div>
+
+		<!-- Le scripts -->
+		<script src="vivus.min.js"></script>
+		<script>
+			vivusLogo = new Vivus('logo', {
+				start: 'manual',
+				type: 'scenario',
+				file: 'logo-wordmark3.svg?'+Math.random(),
+				onReady: function () {
+					// Now I'm ready :) Let's play!
+					vivusLogo.play(0.5, function(){ console.log('logo completed') })
+				}
+			})
+
+			// Do not trigger it here, the SVG is not ready
+			// vivusLogo.play(0.5, function(){ console.log('logo completed') })
+		</script>
+	</body>
+</html>
