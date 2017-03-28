@@ -1,4 +1,4 @@
-var version = 'masterlock-dev-015';
+var version = 'masterlock-dev-016';
 var filesToCache = [
   './',
   './app.css',
