@@ -1,0 +1,12 @@
+CACHE MANIFEST
+
+CACHE:
+# Offline cache v2
+# html files
+./
+
+# css files
+app.css
+
+# js files
+app.js

@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <title>PWA crachtest</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0" />
+
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="stylesheet" href="app.css">
+  </head>
+
+  <body>
+
+    <h1>PWA CrashTest</h1>
+    <h2>Love</h2>
+
+    <script src="app.js"></script>
+
+    <script type="text/javascript">
+      
+  if ('serviceWorker' in navigator) {
+    console.log('CLIENT: service worker registration in progress.');
+    navigator.serviceWorker.register('service-worker.js').then(function() {
+      console.log('CLIENT: service worker registration complete.');
+    }, function() {
+      console.log('CLIENT: service worker registration failure.');
+    });
+  } else {
+    console.log('CLIENT: service worker is not supported.');
+  }
+    </script>
+
+
+  </body>
+</html>
