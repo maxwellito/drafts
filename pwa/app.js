@@ -1,1 +1,1 @@
-console.log('Welcome in the PWA')
+document.getElementById('prompt').textContent = 'le game'
