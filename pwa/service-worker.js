@@ -1,8 +1,8 @@
-var cacheName = 'crashtest-003';
+var cacheName = 'crashtest-004';
 var filesToCache = [
-  '/',
-  '/app.css',
-  '/app.js'
+  './',
+  './app.css',
+  './app.js'
 ];
 
 self.addEventListener('install', function(e) {
