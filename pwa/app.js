@@ -1,1 +1,1 @@
-document.getElementById('prompt').textContent = 'le game'
+document.getElementById('prompt').textContent = 'bored of service worker shite'
