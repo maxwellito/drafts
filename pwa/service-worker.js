@@ -1,4 +1,4 @@
-var cacheName = 'crashtest-004';
+var cacheName = 'crashtest-005';
 var filesToCache = [
   './',
   './app.css',
