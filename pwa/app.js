@@ -1,1 +1,1 @@
-document.getElementById('prompt').textContent = 'bored of service worker shite'
+document.getElementById('prompt').textContent = 'bored of service fuck bloat'
