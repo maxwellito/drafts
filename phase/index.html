@@ -35,9 +35,10 @@
 
 <script type="text/javascript">
   var captureSettings = {
-    video: {
-      facingMode: { exact: "environment" }
-    }
+    video: true
+    // video: {
+    //   facingMode: { exact: "environment" }
+    // }
   };
 
   // Older browsers might not implement mediaDevices at all, so we set an empty object first
@@ -100,13 +101,13 @@
   }
 
   video.go-n-back {
-    animation: .5s linear 0s infinite alternate go-n-back;
-    -webkit-animation: .5s linear 0s infinite alternate go-n-back;
+    animation: .5s linear 0s infinite  go-n-back;
+    -webkit-animation: .5s linear 0s infinite  go-n-back;
   }
 
   video.loop {
-    animation: 2s linear 0s infinite alternate loop;
-    -webkit-animation: 2s linear 0s infinite alternate loop;
+    animation: 2s linear 0s infinite  loop;
+    -webkit-animation: 2s linear 0s infinite  loop;
   }
 
   @-webkit-keyframes go-n-back {
@@ -170,25 +171,25 @@
       -webkit-filter: url('#rf');
       -moz-filter: url('#rf');
       filter: url('#rf');
-      border-bottom: 5px solid red;
+      border-bottom: 5px solid black;
     }
     33%   {
       -webkit-filter: url('#gf');
       -moz-filter: url('#gf');
       filter: url('#gf');
-      border-bottom: 5px solid green;
+      border-bottom: 5px dotted black;
     }
     66%  {
       -webkit-filter: url('#bf');
       -moz-filter: url('#bf');
       filter: url('#bf');
-      border-bottom: 5px solid blue;
+      border-bottom: 5px double black;
     }
     100% {
       -webkit-filter: url('#rf');
       -moz-filter: url('#rf');
       filter: url('#rf');
-      border-bottom: 5px solid red;
+      border-bottom: 5px solid black;
     }
 
   @keyframes loop {
@@ -196,25 +197,25 @@
       -webkit-filter: url('#rf');
       -moz-filter: url('#rf');
       filter: url('#rf');
-      border-bottom: 5px solid red;
+      border-bottom: 5px solid black;
     }
     33%   {
       -webkit-filter: url('#gf');
       -moz-filter: url('#gf');
       filter: url('#gf');
-      border-bottom: 5px solid green;
+      border-bottom: 5px dotted black;
     }
     66%  {
       -webkit-filter: url('#bf');
       -moz-filter: url('#bf');
       filter: url('#bf');
-      border-bottom: 5px solid blue;
+      border-bottom: 5px double black;
     }
     100% {
       -webkit-filter: url('#rf');
       -moz-filter: url('#rf');
       filter: url('#rf');
-      border-bottom: 5px solid red;
+      border-bottom: 5px solid black;
     }
   }
 
