@@ -35,10 +35,9 @@
 
 <script type="text/javascript">
   var captureSettings = {
-    video: true
-    // video: {
-    //   facingMode: { exact: "environment" }
-    // }
+    video: {
+      facingMode: { exact: "environment" }
+    }
   };
 
   // Older browsers might not implement mediaDevices at all, so we set an empty object first
@@ -106,8 +105,8 @@
   }
 
   video.loop {
-    animation: 2s linear 0s infinite  loop;
-    -webkit-animation: 2s linear 0s infinite  loop;
+    animation: 2s linear 0s infinite loop;
+    -webkit-animation: 2s linear 0s infinite loop;
   }
 
   @-webkit-keyframes go-n-back {
