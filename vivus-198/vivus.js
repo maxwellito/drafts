@@ -51,6 +51,7 @@ function Pathformer(element) {
   // Start
   this.scan(element);
 }
+window.Pathformer = Pathformer
 
 /**
  * List of tags which can be transformed
