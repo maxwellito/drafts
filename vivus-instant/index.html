@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello</title>
+  </head>
+  <body>
+    <p>
+      WARNING: This page must be served via HTTP and the animated SVG served
+      from the same domain.
+    </p>
+    <p>But you can click on the SVG now :)</p>
+    <object
+      id="myObjectTag"
+      data="obturateur_animated.svg"
+      onload="theSVGisLoaded()"
+      type="image/svg+xml"
+    ></object>
+
+    <script>
+      const myObjectTag = window.myObjectTag;
+      let theSVG;
+
+      function theSVGisLoaded() {
+        // Once the SVG loaded, we save the DOM element into
+        // the following variable
+        theSVG = myObjectTag.contentWindow.document.children[0];
+
+        // Listen for clicks
+        theSVG.addEventListener('click', restartAnimation);
+
+        // Start the animation
+        theSVG.classList.add('start');
+      }
+
+      // The function to restart the animation
+      function restartAnimation() {
+        // Reset the animation
+        requestAnimationFrame(() => {
+          theSVG.classList.remove('start');
+
+          // Wait the next frame to start the animation
+          requestAnimationFrame(() => {
+            theSVG.classList.add('start');
+          });
+        });
+
+        // The reason we wait the next frame to do it
+        // is because removing and adding the class
+        // at the same time will make no difference to the browser.
+      }
+
+      // PS: I used IDs on DOM element but it's for the example
+      //     this is not a recommended practice for application
+    </script>
+  </body>
+</html>
