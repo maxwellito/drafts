@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="vivus.pr.js"></script>
+    <style>
+      path,
+      line {
+        stroke: black;
+        stroke-width: 2px;
+        fill: none;
+      }
+      table {
+        border-collapse: collapse;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>
+          <svg viewBox="0 0 100 100" width="100" height="100">
+            <line
+              vector-effect="non-scaling-stroke"
+              x1="0"
+              y1="0"
+              x2="200"
+              y2="200"
+              transform="scale(.5,.5)"
+            />
+          </svg>
+        </td>
+        <td>
+          <svg viewBox="0 0 200 100" width="200" height="100">
+            <line
+              vector-effect="non-scaling-stroke"
+              x1="0"
+              y1="0"
+              x2="200"
+              y2="200"
+              transform="scale(1,.5)"
+            />
+          </svg>
+        </td>
+        <td>
+          <svg viewBox="0 0 300 100" width="300" height="100">
+            <line
+              vector-effect="non-scaling-stroke"
+              x1="0"
+              y1="0"
+              x2="200"
+              y2="200"
+              transform="scale(1.5,.5)"
+            />
+          </svg>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <svg viewBox="0 0 100 200" width="100" height="200">
+            <line
+              vector-effect="non-scaling-stroke"
+              x1="0"
+              y1="0"
+              x2="200"
+              y2="200"
+              transform="scale(.5,1)"
+            />
+          </svg>
+        </td>
+        <td>
+          <svg viewBox="0 0 200 200" width="200" height="200">
+            <line
+              vector-effect="non-scaling-stroke"
+              x1="0"
+              y1="0"
+              x2="200"
+              y2="200"
+              transform="scale(1,1)"
+            />
+          </svg>
+        </td>
+        <td>
+          <svg viewBox="0 0 300 200" width="300" height="200">
+            <line
+              vector-effect="non-scaling-stroke"
+              x1="0"
+              y1="0"
+              x2="200"
+              y2="200"
+              transform="scale(1.5,1)"
+            />
+          </svg>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <svg viewBox="0 0 100 300" width="100" height="300">
+            <line
+              vector-effect="non-scaling-stroke"
+              x1="0"
+              y1="0"
+              x2="200"
+              y2="200"
+              transform="scale(.5,1.5)"
+            />
+          </svg>
+        </td>
+        <td>
+          <svg viewBox="0 0 200 300" width="200" height="300">
+            <line
+              vector-effect="non-scaling-stroke"
+              x1="0"
+              y1="0"
+              x2="200"
+              y2="200"
+              transform="scale(1,1.5)"
+            />
+          </svg>
+        </td>
+        <td>
+          <svg viewBox="0 0 300 300" width="300" height="300">
+            <line
+              vector-effect="non-scaling-stroke"
+              x1="0"
+              y1="0"
+              x2="200"
+              y2="200"
+              transform="scale(1.5,1.5)"
+            />
+          </svg>
+        </td>
+      </tr>
+    </table>
+    <script>
+      Array.from(document.querySelectorAll('svg')).forEach(
+        (svg) => new Vivus(svg, { start: 'autostart' })
+      );
+    </script>
+  </body>
+</html>
