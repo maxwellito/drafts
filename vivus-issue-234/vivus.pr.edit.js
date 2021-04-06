@@ -1182,6 +1182,7 @@ Pathformer.prototype.parseAttr = function (element) {
       scale;
     timePoint = totalLength = lengthMeter = 0;
     paths = this.el.querySelectorAll('path');
+    this.map = [];
 
     for (i = 0; i < paths.length; i++) {
       path = paths[i];
@@ -1194,8 +1195,7 @@ Pathformer.prototype.parseAttr = function (element) {
       if (path.getAttribute('vector-effect') === 'non-scaling-stroke') {
         var rect = path.getBoundingClientRect();
         var box = path.getBBox();
-        scale = (rect.width / box.width) * (rect.height / box.height);
-        debugger;
+        scale = Math.max(rect.width / box.width, rect.height / box.height);
       } else {
         scale = 1;
       }
@@ -1403,7 +1403,6 @@ Pathformer.prototype.parseAttr = function (element) {
     // Set object variables
     this.frameLength = 0;
     this.currentFrame = 0;
-    this.map = [];
 
     // Start
     new Pathformer(this.el);
