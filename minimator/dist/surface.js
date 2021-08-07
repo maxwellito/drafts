@@ -276,4 +276,43 @@ export class Surface {
         this.el.appendChild(path);
         this.currentElement = path;
     }
+    // Make the CANVAS baby!
+    buildPNG() {
+        const offset = 4 * this.gap;
+        const width = (this.width + 8) * this.gap;
+        const height = (this.height + 8) * this.gap;
+        const svg = this.el.cloneNode(true);
+        svg.setAttribute('viewBox', `${-offset},${-offset},${width},${height}`);
+        const blob = new Blob([svg.outerHTML], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(blob);
+        const image = document.createElement('img');
+        const basicShare = {
+            url: window.location.toString(),
+            title: 'graxel',
+            text: 'graxel is a pocket pixel editor to doodle and relax.',
+        };
+        const fullShare = {
+            ...basicShare,
+            files: [
+                new File([blob], 'image.png', {
+                    type: blob.type,
+                })
+            ],
+        };
+        if (navigator.canShare(fullShare)) {
+            navigator.share(fullShare);
+        }
+        else if (navigator.canShare(basicShare)) {
+            navigator.share(basicShare);
+        }
+        // return blob;
+        // return new Promise((res) => {
+        //   image.addEventListener(
+        //     'load', 
+        //     () => URL.revokeObjectURL(url), 
+        //     {once: true}
+        //   );
+        //   image.src = url;
+        // });
+    }
 }

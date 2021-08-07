@@ -55,21 +55,12 @@ export class TouchController {
         this.touchstart = this.touchstart.bind(this);
         this.touchmove = this.touchmove.bind(this);
         this.touchend = this.touchend.bind(this);
-        this.mousemove = this.mousemove.bind(this);
-        this.mousedown = this.mousedown.bind(this);
-        this.mouseup = this.mouseup.bind(this);
-        this.mousescroll = this.mousescroll.bind(this);
         // this.eventRouterDigest = this.eventRouterDigest.bind(this);
-        // Start listening touch events
+        // Start listening
         this.el.addEventListener('touchstart', this.touchstart);
         this.el.addEventListener('touchmove', this.touchmove);
         this.el.addEventListener('touchend', this.touchend);
         this.el.addEventListener('touchcancel', this.touchend);
-        // Start listening mouse events
-        this.el.addEventListener('mousemove', this.mousemove);
-        this.el.addEventListener('mousedown', this.mousedown);
-        this.el.addEventListener('mouseup', this.mouseup);
-        this.el.addEventListener('wheel', this.mousescroll);
     }
     on(callback) {
         this.callbacks.push(callback);
@@ -84,9 +75,6 @@ export class TouchController {
         e.stopPropagation();
         e.preventDefault();
     }
-    /**
-     * Touch events
-     */
     touchstart(e) {
         this.blockEvent(e);
         // console.log(e);
@@ -173,39 +161,6 @@ export class TouchController {
             // TODO clear everything
         }
     }
-    /*
-     * Mouse events
-     */
-    mousedown(e) { }
-    mousemove(e) { }
-    mouseup(e) { }
-    mousescroll(e) {
-        e.preventDefault();
-        const defaultData = {
-            origin: {
-                x: e.pageX,
-                y: e.pageY,
-            },
-            drag: {
-                x: 0,
-                y: 0,
-            },
-            scale: 1,
-        };
-        this.setEventType(GESTURE.SCALE, defaultData);
-        this.triggerUpdate({
-            origin: {
-                x: e.pageX,
-                y: e.pageY,
-            },
-            drag: {
-                x: 0,
-                y: 0,
-            },
-            scale: Math.pow(1.01, -e.deltaY),
-        });
-        console.log(e.pageX, e.pageY);
-    }
     isCurrentEventDetected() {
         return this.currentEvent !== GESTURE.NONE;
     }
@@ -227,7 +182,6 @@ export class TouchController {
                         y: b.clientY - a.clientY,
                     },
                 });
-                console.log(a.clientX, a.clientY);
                 break;
             case GESTURE.SCALE:
                 const b1 = e.touches.item(0);
