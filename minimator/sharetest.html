@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Share API</title>
+</head>
+<body>
+  
+<button onclick="share()">SHARE</button>
+<script>
+var svgContent = `<svg data-ref="svg" xmlns="http://www.w3.org/2000/svg" class="surface" viewBox="-80,-80,560,560">
+        <defs>
+          <pattern width="5%" height="5%" viewBox="0,0,20,20" id="dot-NTYwNjUyODQ5NjM4MjIzMg==">
+            <circle cx="10" cy="10" r="1" fill="#000"></circle>
+          </pattern>
+        </defs>
+        <rect data-ref="dots" x="0" y="0" width="400" height="400" fill="url('#dot-NTYwNjUyODQ5NjM4MjIzMg==')"></rect>
+        <g data-ref="content" stroke="black" stroke-linecap="round" fill="none" stroke-width="5"><path d="M190,150C190,140,200,130,210,130" class=""></path><path d="M210,130C220,130,230,140,230,150" class=""></path><line x1="210" x2="230" y1="170" y2="170" class=""></line><line x1="190" x2="190" y1="150" y2="170" class=""></line><path d="M190,170C190,180,200,190,210,190" class=""></path><path d="M210,190C220,190,230,180,230,170" class=""></path><path d="M190,150C180,150,170,160,170,170" class=""></path><line x1="170" x2="170" y1="170" y2="190" class=""></line><path d="M170,190C170,200,180,210,190,210" class=""></path><path d="M190,210C200,210,210,200,210,190" class=""></path><line x1="210" x2="190" y1="190" y2="190" class=""></line><path d="M170,170C160,170,150,180,150,190" class=""></path><line x1="150" x2="150" y1="190" y2="210" class=""></line><path d="M150,210C150,220,160,230,170,230" class=""></path><path d="M170,230C180,230,190,220,190,210" class=""></path><line x1="190" x2="170" y1="210" y2="210" class=""></line><path d="M190,230C200,230,210,220,210,210" class=""></path><path d="M210,210C220,210,230,200,230,190" class=""></path><path d="M210,230C220,230,230,220,230,210" class=""></path><path d="M150,170C150,160,160,150,170,150" class=""></path><path d="M170,150C170,140,180,130,190,130" class=""></path><path d="M150,150C150,140,160,130,170,130" class=""></path><line x1="150" x2="230" y1="110" y2="110" class=""></line><path d="M230,110C240,110,250,120,250,130" class=""></path><line x1="250" x2="250" y1="130" y2="230" class=""></line><path d="M250,230C250,240,240,250,230,250" class=""></path><line x1="230" x2="150" y1="250" y2="250" class=""></line><path d="M150,250C140,250,130,240,130,230" class=""></path><line x1="130" x2="130" y1="230" y2="130" class=""></line><path d="M130,130C130,120,140,110,150,110" class=""></path></g>
+      </svg>`;
+  
+// const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+// const file = new File([blob], `minimator_demo.svg`, {
+//   type: blob.type,
+// })
+// var img = new Image();
+//     img.src = window.URL.createObjectURL(blob);
+//     img.addEventListener('load', function () {
+//       img.
+//     }.bind(this));
+
+function share (url = 'https://hello.com', title = 'Hello inc.') {
+  const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+  const basicShare = {
+    url,
+    title,
+  };
+  const fullShare = {
+    ...basicShare,
+    files: [
+      new File([blob], `minimator_demo.svg`, {
+        type: blob.type,
+      }),
+    ],
+  };
+  if (navigator.canShare(fullShare)) {
+    alert('FULL');
+    navigator.share(fullShare);
+  } else if (navigator.canShare(basicShare)) {
+    alert('BASIC');
+    navigator.share(basicShare);
+  } else {
+    alert('NADA');
+  }
+}
+</script>
+</body>
+</html>
