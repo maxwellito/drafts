@@ -8,7 +8,7 @@
 </head>
 <body>
   
-<button onclick="share()">SHARE</button>
+<button onclick="start()">SHARE</button>
 <script>
 var svgContent = `<svg data-ref="svg" xmlns="http://www.w3.org/2000/svg" class="surface" viewBox="-80,-80,560,560">
         <defs>
@@ -29,6 +29,118 @@ var svgContent = `<svg data-ref="svg" xmlns="http://www.w3.org/2000/svg" class="
 //     img.addEventListener('load', function () {
 //       img.
 //     }.bind(this));
+
+function start() {
+  buildPNG().then(dd)
+}
+
+
+function picShare () {
+  var canvas = document.createElement("canvas");
+  var ctx = canvas.getContext("2d");
+
+  const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+  const url = window.URL.createObjectURL(blob);
+
+  baseimage = new Image();
+  baseimage.onload = function() {
+      ctx.drawImage(baseimage,1,1);    
+      var dataURL = canvas.toDataURL("image/png");
+      console.log('Le data', dataURL);
+  }
+  baseimage.src = url;
+}
+
+
+// Make the CANVAS baby!
+function buildPNG() {
+  const [,viewBox] = /viewBox="([0-9- ,]+)"/.exec(svgContent);
+  const [,,width,height] = viewBox.split(',').map(c=>parseInt(c));
+  const ratio = 3000 / Math.max(width, height);
+
+  const canvas = document.createElement('canvas');
+  canvas.width = width * ratio;
+  canvas.height = height * ratio;
+  var ctx = canvas.getContext("2d");
+
+
+  const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+  const url = window.URL.createObjectURL(blob);
+
+  return new Promise((res, rej) => {
+    baseimage = new Image();
+    baseimage.style.background = '#fff';
+    baseimage.onload = function() {
+        ctx.drawImage(baseimage,1,1, canvas.width, canvas.height);
+        canvas.toBlob((blob) => {
+          const file = new File([blob], 'graxel.png', { type: 'image/png' });
+
+          // res(window.URL.createObjectURL(file));
+          res(file);
+        });
+    }
+    baseimage.onerror = rej;
+    baseimage.src = url;
+    
+  });
+}
+
+function dd (file,url = 'https://hello.com', title = 'Hello inc.') {
+  const basicShare = {
+    url,
+    title,
+  };
+  const fullShare = {
+    ...basicShare,
+    files: [file],
+  };
+  if (navigator.canShare(fullShare)) {
+    alert('FULL');
+    navigator.share(fullShare);
+  } else if (navigator.canShare(basicShare)) {
+    alert('BASIC');
+    navigator.share(basicShare);
+  } else {
+    alert('NADA');
+  }
+}
+
+// Make the CANVAS baby!
+function buildPNGoriginal() {
+  const pixelSize = 50;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = (squareSize + 6) * pixelSize;
+  canvas.height = (squareSize + 6) * pixelSize;
+
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = 'black';
+  ctx.fillRect(0, 0, (squareSize + 6) * pixelSize, (squareSize + 6) * pixelSize);
+
+  ctx.fillStyle = 'white';
+  Array.from(svg.childNodes).forEach((pixel, i) => {
+    if (!pixel.classList.contains('on')) {
+      return;
+    }
+    const x = i % squareSize;
+    const y = Math.floor(i / squareSize);
+    ctx.fillRect(
+      (x + 3) * pixelSize,
+      (y + 3) * pixelSize,
+      pixelSize,
+      pixelSize
+    );
+  });
+
+  return new Promise((res) => {
+    canvas.toBlob((blob) => {
+      const file = new File([blob], 'graxel.png', { type: 'image/png' });
+      res(file);
+    });
+  });
+}
+
+
 
 function share (url = 'https://hello.com', title = 'Hello inc.') {
   const blob = new Blob([svgContent], { type: 'image/svg+xml' });
