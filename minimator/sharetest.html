@@ -61,8 +61,10 @@ function buildPNG() {
   const canvas = document.createElement('canvas');
   canvas.width = width * ratio;
   canvas.height = height * ratio;
-  var ctx = canvas.getContext("2d");
 
+  var ctx = canvas.getContext("2d");
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   const blob = new Blob([svgContent], { type: 'image/svg+xml' });
   const url = window.URL.createObjectURL(blob);
